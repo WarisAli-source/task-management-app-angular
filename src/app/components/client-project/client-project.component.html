@@ -1,0 +1,150 @@
+<div class="container mt-4">
+    <div class="container mt-4">
+        <!-- Button to Open Modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#clientProjectModal">
+            Add Client
+        </button>
+    
+        <div class="modal fade" id="clientProjectModal" tabindex="-1" aria-labelledby="clientProjectModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="clientModalLabel">Client Information</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form [formGroup]="projectForm">
+                            <!-- First Row of 4 inputs -->
+                            <div class="row">
+                                <!-- <div class="col-md-3 mb-3">
+                                    <label for="clientProjectId" class="form-label">Client Project ID</label>
+                                    <input type="number" id="clientProjectId" class="form-control" placeholder="Enter ID" required>
+                                </div> -->
+                                <div class="col-md-3 mb-3">
+                                    <label for="projectName" class="form-label">Project Name</label>
+                                    <input type="text" id="projectName" formControlName="projectName" class="form-control" placeholder="Enter Name" required>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="startDate" class="form-label">Start Date</label>
+                                    <input type="date" id="startDate" formControlName="startDate" class="form-control" required>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="expectedEndDate" class="form-label">Expected End Date</label>
+                                    <input type="date" id="expectedEndDate" formControlName="expectedEndDate" class="form-control" required>
+                                </div>
+                            </div>
+    
+                            <!-- Second Row of 4 inputs -->
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label for="leadByEmpId" class="form-label">Lead by Employee ID</label>
+                                    <select id="leadByEmpId" formControlName="leadByEmpId" class="form-control" required>
+                                      <option value="" selected>Select Lead by Employee ID</option>
+                                      @for (item of employeeList; track $index) {
+                                        <option [value]="item.empId">{{item.empName}} : {{item.empCode}}</option>
+                                      }
+                                      
+                                    </select>
+                                  </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="completedDate" class="form-label">Completed Date</label>
+                                    <input type="date" id="completedDate" formControlName="completedDate" class="form-control">
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="contactPerson" class="form-label">Contact Person</label>
+                                    <input type="text" id="contactPerson" formControlName="contactPerson" class="form-control" placeholder="Enter Name" required>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="contactPersonContactNo" class="form-label">Contact No</label>
+                                    <input type="text" id="contactPersonContactNo" formControlName="contactPersonContactNo" class="form-control" placeholder="Enter Contact No" pattern="^[0-9]{10}$" required>
+                                </div>
+                            </div>
+    
+                            <!-- Third Row of 4 inputs -->
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label for="totalEmpWorking" class="form-label">Total Employees</label>
+                                    <input type="number" id="totalEmpWorking" formControlName="totalEmpWorking" class="form-control" placeholder="Enter Total" required>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="projectCost" class="form-label">Project Cost</label>
+                                    <input type="number" id="projectCost" formControlName="projectCost" class="form-control" placeholder="Enter Cost" required>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="contactPersonEmailId" class="form-label">Email ID</label>
+                                    <input type="email" id="contactPersonEmailId" formControlName="contactPersonEmailId" class="form-control" placeholder="Enter Email" required>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="clientId" class="form-label">Client ID</label>
+                                    <select id="clientId" formControlName="clientId" class="form-control" required>
+                                      <option value="" selected>Select Client ID</option>
+                                      @for (item of clientList; track $index) {
+                                        <option [value]="item.clientId">{{item.companyName}}</option>
+                                      }
+                                      
+                                    </select>
+                                  </div>
+                            </div>
+    
+                            <!-- Full Width Text Area for Project Details -->
+                            <div class="row">
+                                <div class="col-12 mb-3">
+                                    <label for="projectDetails" class="form-label">Project Details</label>
+                                    <textarea id="projectDetails" formControlName="projectDetails" class="form-control" placeholder="Enter Details" rows="3" required></textarea>
+                                </div>
+                            </div>
+    
+                            <!-- Submit Button -->
+                            <button type="submit" (click)="onSaveProject()" class="btn btn-primary">Save Project</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Table to Display All Clients -->
+    <div class="card mt-4">
+        <div class="card-header bg-secondary text-white">
+          <h4>All Clients {{currentDate | date}}</h4>
+        </div>
+        <div class="card-body">
+          <!-- <div *ngIf="isLoading">Loading clients...</div>
+          <div *ngIf="!isLoading && clientList.length > 0" class="table-responsive"> -->
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Client ID</th>
+                  <th>Contact Person</th>
+                  <th>Company Name</th>
+                  <th>State</th>
+                  <th>Employee Strength</th>
+                  <th>GST No</th>
+                  <th>Contact No</th>
+                  <th>Registration No</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let project of clientProjectList">
+                    <td>{{ project.clientProjectId }}</td>
+                    <td>{{ project.empName }}</td>
+                    <td>{{ project.clientName  | uppercase}}</td>
+                    <td>{{ project.empDesignation }}</td>
+                    <td>{{ project.empId }}</td>
+                    <td>{{ project.empCode }}</td>
+                    <td>{{ project.empEmailId }}</td>
+                    <td>{{ project.startDate | date:'yyyy-MM-dd' }}</td>
+                    <!-- <td>
+                      
+                      <button class="btn btn-primary btn-sm" (click)="editProject(project)">Edit</button>
+                      <button class="btn btn-danger btn-sm" (click)="deleteProject(project.clientProjectId)">Delete</button>
+                    </td>
+                  </tr> -->
+              </tbody>
+            </table>
+          </div>
+          <!-- <div *ngIf="!isLoading && clientList.length === 0">No clients available.</div> -->
+        </div>
+    </div>     
+  

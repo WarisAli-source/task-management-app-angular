@@ -1,0 +1,37 @@
+.card-body{
+    overflow-y: scroll;
+    height: 450px;
+}
+/* Make the table horizontally scrollable on small screens */
+.table-responsive {
+    overflow-x: auto;
+  }
+  
+  /* Reduce button size on smaller screens */
+  @media (max-width: 576px) {
+    .btn {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.8rem;
+    }
+  
+    /* Adjust modal width on small screens */
+    .modal-dialog {
+      max-width: 95%;
+      margin: 0 auto;
+    }
+  }
+  
+  /* Center-align table headers and cells for compact screens */
+  @media (max-width: 768px) {
+    th, td {
+      text-align: center;
+    }
+  }
+  
+  /* Limit width of table cells on very narrow screens */
+  @media (max-width: 576px) {
+    td {
+      white-space: nowrap;
+    }
+  }
+  

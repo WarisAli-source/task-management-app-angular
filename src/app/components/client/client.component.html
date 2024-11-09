@@ -1,0 +1,191 @@
+<div class="container mt-4">
+    <div class="container mt-4">
+        <!-- Button to Open Modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#clientModal">
+          Add Client
+        </button>
+      
+        <div class="modal fade" id="clientModal" tabindex="-1" aria-labelledby="clientModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="clientModalLabel">Client Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form (ngSubmit)="onSubmit()" #clientForm="ngForm">
+                    <div class="row mb-3">
+                      <div class="col-md-6">
+                        <label for="contactPersonName" class="form-label">Contact Person Name</label>
+                        <input type="text" id="contactPersonName" class="form-control"
+                               [(ngModel)]="client.contactPersonName" name="contactPersonName"
+                               placeholder="Enter Contact Person Name" required minlength="3" #contactPersonName="ngModel">
+                        <div *ngIf="contactPersonName.invalid && contactPersonName.touched" class="text-danger">
+                          <small *ngIf="contactPersonName.errors?.['required']">Contact Person Name is required.</small>
+                          <small *ngIf="contactPersonName.errors?.['minlength']">Minimum 3 characters required.</small>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="companyName" class="form-label">Company Name</label>
+                        <input type="text" id="companyName" class="form-control"
+                               [(ngModel)]="client.companyName" name="companyName"
+                               placeholder="Enter Company Name" required minlength="2" #companyName="ngModel">
+                        <div *ngIf="companyName.invalid && companyName.touched" class="text-danger">
+                          <small *ngIf="companyName.errors?.['required']">Company Name is required.</small>
+                          <small *ngIf="companyName.errors?.['minlength']">Minimum 2 characters required.</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-md-6">
+                        <label for="contactNo" class="form-label">Contact Number</label>
+                        <input type="text" id="contactNo" class="form-control"
+                               [(ngModel)]="client.contactNo" name="contactNo"
+                               placeholder="Enter Contact Number" required pattern="^[0-9]{10}$" #contactNo="ngModel">
+                        <div *ngIf="contactNo.invalid && contactNo.touched" class="text-danger">
+                          <small *ngIf="contactNo.errors?.['required']">Contact Number is required.</small>
+                          <small *ngIf="contactNo.errors?.['pattern']">Contact Number must be 10 digits.</small>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="gstNo" class="form-label">GST No</label>
+                        <input type="text" id="gstNo" class="form-control"
+                               [(ngModel)]="client.gstNo" name="gstNo"
+                               placeholder="Enter GST No" required pattern="^[0-9A-Z]{15}$" #gstNo="ngModel">
+                        <div *ngIf="gstNo.invalid && gstNo.touched" class="text-danger">
+                          <small *ngIf="gstNo.errors?.['required']">GST No is required.</small>
+                          <small *ngIf="gstNo.errors?.['pattern']">GST No must be 15 alphanumeric characters.</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-md-4">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" id="address" class="form-control"
+                               [(ngModel)]="client.address" name="address"
+                               placeholder="Enter Address" required minlength="5" #address="ngModel">
+                        <div *ngIf="address.invalid && address.touched" class="text-danger">
+                          <small *ngIf="address.errors?.['required']">Address is required.</small>
+                          <small *ngIf="address.errors?.['minlength']">Minimum 5 characters required.</small>
+                        </div>
+                      </div>
+                  
+                      <div class="col-md-4">
+                        <label for="city" class="form-label">City</label>
+                        <input type="text" id="city" class="form-control"
+                               [(ngModel)]="client.city" name="city"
+                               placeholder="Enter City" required minlength="2" #city="ngModel">
+                        <div *ngIf="city.invalid && city.touched" class="text-danger">
+                          <small *ngIf="city.errors?.['required']">City is required.</small>
+                          <small *ngIf="city.errors?.['minlength']">Minimum 2 characters required.</small>
+                        </div>
+                      </div>
+                  
+                      <div class="col-md-4">
+                        <label for="pincode" class="form-label">Pincode</label>
+                        <input type="text" id="pincode" class="form-control"
+                               [(ngModel)]="client.pincode" name="pincode"
+                               placeholder="Enter Pincode" required pattern="^[0-9]{6}$" #pincode="ngModel">
+                        <div *ngIf="pincode.invalid && pincode.touched" class="text-danger">
+                          <small *ngIf="pincode.errors?.['required']">Pincode is required.</small>
+                          <small *ngIf="pincode.errors?.['minlength']">Pincode must be 6 digits.</small>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <!-- State and Employee Strength -->
+                    <div class="row mb-3">
+                      <div class="col-md-4">
+                        <label for="state" class="form-label">State</label>
+                        <input type="text" id="state" class="form-control"
+                               [(ngModel)]="client.state" name="state"
+                               placeholder="Enter State" required minlength="2" #state="ngModel">
+                        <div *ngIf="state.invalid && state.touched" class="text-danger">
+                          <small *ngIf="state.errors?.['required']">State is required.</small>
+                          <small *ngIf="state.errors?.['required']">Minimum 2 characters required.</small>
+                        </div>
+                      </div>
+                  
+                      <div class="col-md-4">
+                        <label for="employeeStrength" class="form-label">Employee Strength</label>
+                        <input type="number" id="employeeStrength" class="form-control"
+                               [(ngModel)]="client.employeeStrength" name="employeeStrength"
+                               placeholder="Enter Employee Strength" required min="1" #employeeStrength="ngModel">
+                        <div *ngIf="employeeStrength.invalid && employeeStrength.touched" class="text-danger">
+                          <small *ngIf="employeeStrength.errors?.['required']">Employee Strength is required.</small>
+                          <small *ngIf="employeeStrength.errors?.['minlength']">Must be at least 1.</small>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <!-- Registration No -->
+                    <div class="row mb-3">
+                      <div class="col-md-6">
+                        <label for="regNo" class="form-label">Registration No</label>
+                        <input type="text" id="regNo" class="form-control"
+                               [(ngModel)]="client.regNo" name="regNo"
+                               placeholder="Enter Registration No" required minlength="5" #regNo="ngModel">
+                        <div *ngIf="regNo.invalid && regNo.touched" class="text-danger">
+                          <small *ngIf="regNo.errors?.['required']">Registration No is required.</small>
+                          <small *ngIf="regNo.errors?.['minlength']">Minimum 5 characters required.</small>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Submit Button -->
+                    <button type="submit" [disabled]="clientForm.invalid" class="btn btn-primary mt-3">
+                        {{client.clientId != 0 ? "Update Client": "Save Client"}}</button>
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- Table to Display All Clients -->
+    <div class="card mt-4">
+        <div class="card-header bg-secondary text-white">
+          <h4>All Clients</h4>
+        </div>
+        <div class="card-body">
+          <div *ngIf="isLoading">Loading clients...</div>
+          <div *ngIf="!isLoading && clientList.length > 0" class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Client ID</th>
+                  <th>Contact Person</th>
+                  <th>Company Name</th>
+                  <th>State</th>
+                  <th>Employee Strength</th>
+                  <th>GST No</th>
+                  <th>Contact No</th>
+                  <th>Registration No</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let client of clientList">
+                  <td>{{ client.clientId }}</td>
+                  <td>{{ client.contactPersonName }}</td>
+                  <td>{{ client.companyName }}</td>
+                  <td>{{ client.state }}</td>
+                  <td>{{ client.employeeStrength }}</td>
+                  <td>{{ client.gstNo }}</td>
+                  <td>{{ client.contactNo }}</td>
+                  <td>{{ client.regNo }}</td>
+                  <td>
+                    <button (click)="deleteClient(client.clientId)" class="btn btn-danger btn-sm ml-2">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                    <button (click)="openEditPopup(client)" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#clientModal">
+                      <i class="fa fa-pen"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div *ngIf="!isLoading && clientList.length === 0">No clients available.</div>
+        </div>
+      </div>      
+  </div>
+  

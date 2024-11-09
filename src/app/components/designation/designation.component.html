@@ -1,0 +1,19 @@
+<div class="row">
+    @if(isLoading){
+        <div class="spinner-border text-info"></div>
+    }
+    @else {
+        @for (item of designationist; track $index) {
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">{{item.designation}}</h4>
+                      <p class="card-text">{{item.designationId}}</p>
+                      <a href="#" class="card-link">Edit</a>
+                      <a href="#" class="card-link">Delete</a>
+                    </div>
+                </div> 
+            </div>
+        }
+    }
+</div>
